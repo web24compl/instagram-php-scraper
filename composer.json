@@ -1,12 +1,12 @@
 {
-  "name": "raiym/instagram-php-scraper",
+  "name": "web24compl/instagram-php-scraper",
   "description": "Instagram PHP Scraper. Get account information, photos and videos without any authorization",
   "keywords": [
     "instagram",
     "scraper"
   ],
   "type": "library",
-  "homepage": "https://github.com/raiym/instagram-php-scraper",
+  "homepage": "https://github.com/web24compl/instagram-php-scraper",
   "license": "MIT",
   "authors": [
     {

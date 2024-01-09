@@ -417,7 +417,7 @@ class Instagram
 
         //user agent to retrieve account data
         $this->setUserAgent("Instagram 219.0.0.12.117 Android");
-	
+
         if ($this->getUserAgent()) {
             $headers['user-agent'] = $this->getUserAgent();
 
@@ -1607,22 +1607,22 @@ class Instagram
         }
 
         $this->parseCookies($response->headers);
-        
+
         $arr = $this->decodeRawBodyToJson($response->raw_body);
 
         if (!is_array($arr)) {
             throw new InstagramException('Response decoding failed. Returned data corrupted or this library outdated. Please report issue');
         }
         $rootKey = array_key_exists('graphql', $arr) ? 'graphql' : 'data';
-        
+
         $medias = [];
-        
+
         $payload = $arr[$rootKey]['top']['sections'];
         $nodes = array();
         foreach($payload as $p){
             $nodes = array_merge($nodes,$p['layout_content']['medias']);
         }
-            
+
         foreach ($nodes as $mediaArray) {
             $medias[] = Media::create($mediaArray['media']);
         }
@@ -2213,7 +2213,7 @@ class Instagram
                 throw new InstagramException('Response code is ' . $response->code . ': ' . static::httpCodeToString($response->code) . '.' .
                                              'Something went wrong. Please report issue.', $response->code, static::getErrorBody($response->body));
             }
-            preg_match('/\\\\"csrf_token\\\\":\\\\"(.*?)\\\\"/', $response->body, $match);
+            preg_match('/csrf_token":"([A-Za-z0-9_-]+)/', $response->body, $match);
             $csrfToken = isset($match[1]) ? $match[1] : '';
             $cookies = $this->parseCookies($response->headers);
 
